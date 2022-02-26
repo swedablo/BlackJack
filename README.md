@@ -1,5 +1,5 @@
 # BlackJack
-A blackjack program, including a strategy dervied from Machine Learning.
+A blackjack program, including a strategy derived from Machine Learning.
 
 The program compares a simple Dealer Strategy to a Machine Learning Strategy using reinforced learning. Its quite fascinationg how the ML program learns by itself, without knowing the rules of the game, a strategy very close to the well known "Basic Strategy" (as describe in the book "Beat The Dealer" by Edward O Thorp).
 
