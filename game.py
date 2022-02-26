@@ -6,9 +6,9 @@ import sys
 if __name__ == '__main__':
 
     players     = 2
-    realRounds  = 150000
+    realRounds  = 100000
 
-    trainRounds = 100000
+    trainRounds = 150000
     trainModel  = True #If set to False, a loaded Q-table will be used.
     saveQValues = False #Only applicalbe if "TrainModel" is set to True. Will then save down trained Q-table to file
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
             sys.exit(1) #an exception was raised. Close the program
 
 
-    print('\nStarts playing real game\n')
+    print('\nStarts playing real game:\n')
 
     #Play game according to trained model
     Game = BlackJack.BlackJack(players)
