@@ -112,9 +112,8 @@ class BlackJack:
                 print('\n--- ROUND {}'.format(r+1))
                 self.show()
 
-    def play_MLStrategy(self, rounds = 1, debug = False ):
+    def play_MLStrategy(self, Strategy, rounds = 1, debug = False ):
         
-        Strategy = MLStrategy.MLStrategy()
         Strategy.setExplorationRate(0)
         Strategy.loadQValueJson()
 
@@ -155,7 +154,7 @@ class BlackJack:
         if debug: print('Strategy created')
         for r in range(rounds):
 
-            if debug:print('\n--- Start of ROUND {}'.format(r+1))
+            if debug: print('\n--- Start of ROUND {}'.format(r+1))
             
             self.setupGame()
             if debug: print('Game setup. Start to play')
