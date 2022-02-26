@@ -1,4 +1,4 @@
 # BlackJack
-A blackjack program, exploring intrests in Machine Learning
+A blackjack program, including a strategy dervied from Machine Learning.
 
-Compares a simple Dealer Strategy to a machine learning strategy using reinforced learning
+Compares a simple Dealer Strategy to a Machine Learning Strategy using reinforced learning.
