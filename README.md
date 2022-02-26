@@ -1,11 +1,11 @@
 # BlackJack
 A blackjack program, including a strategy dervied from Machine Learning.
 
-The program compares a simple Dealer Strategy to a Machine Learning Strategy using reinforced learning. 
+The program compares a simple Dealer Strategy to a Machine Learning Strategy using reinforced learning. Its quite fascinationg how the ML program learns by itself, without knowing the rules of the game, a strategy very close to the well known "Basic Strategy" (as describe in the book "Beat The Dealer" by Edward O Thorp).
 
 Run "game.py" to start the simulation.
 
-### Rules: ###
+### Blackjack Rules: ###
 1. The goal of BlackJack is to beat the dealer's hand without going above 21.
 2. The dealer have to draw a card until the dealer has 17 or above.
 3. On a tie, the player's bet is returned to the player.
