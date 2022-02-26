@@ -115,28 +115,28 @@ class BlackJack:
     def play_MLStrategy(self, Strategy, rounds = 1, debug = False ):
         
         Strategy.setExplorationRate(0)
-        Strategy.loadQValueJson()
 
         if debug: print('Strategy created')
         for r in range(rounds):
 
-            if debug:print('\n--- Start of ROUND {}'.format(r+1))
+            if debug: print('\n--- Start of ROUND {}'.format(r+1))
             
             self.setupGame()
             if debug: print('Game setup. Start to play')
             if debug: print('Player starts with: ', self.getStatus(self.players[0]))
             #play one round
-            while True: #Play until action == 0 (i.e. Stand) or until player bust.
-                action = Strategy.chooseAction(self.players[0], self.dealer)
-                if debug: print(f'Action = {action}')
-                if action == 0:
-                    break
-                else:
-                    self.hitMe(self.players[0])
-                    if (self.players[0].getTotal() > 21):
-                        if debug: print('BUSTS!', self.getStatus(self.players[0]))
-                        break  
-                if debug: print('->NewTotal: ', self.getStatus(self.players[0]))
+            for player in self.players: #let all players play
+                while True: #Play until player's action == 0 (i.e. Stand) or until player bust.
+                    action = Strategy.chooseAction(player, self.dealer)
+                    if debug: print(f'Action = {action}')
+                    if action == 0:
+                        break
+                    else:
+                        self.hitMe(player)
+                        if (player.getTotal() > 21):
+                            if debug: print('BUSTS!', self.getStatus(player))
+                            break  
+                    if debug: print('->NewTotal: ', self.getStatus(player))
             self.playDealersTurn()
 
             #Round is now done. Decide winner and reward
@@ -215,8 +215,7 @@ class BlackJack:
                 winners[p.getName()] = 1
         return winners
 
-
-    # SCORE RELATED FUNCTIONS
+    #### SCORE RELATED FUNCTIONS ####
     def updateScores(self):
         for p in self.players:
             if p.hasBlackJack():

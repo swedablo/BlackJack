@@ -143,7 +143,7 @@ class MLStrategy:
 
             #Save Q-table to file
         if saveQValues:
-            self.saveQValueJson()
+            self.saveQValue()
 
 
 
@@ -167,14 +167,22 @@ class MLStrategy:
                     print(' {}:S (H:{}/S:{})'.format(dT, self.player_Q_values[(pT,dT,softHand)][1], self.player_Q_values[(pT,dT,softHand)][0]),end=', ')
             print(' ')
     
-    def saveQValueJson(self):
+    def saveQValue(self):
         f = open('trainedMLQValue.pkl','wb')
         pickle.dump(self.player_Q_values,f)
         f.close()
     
-    def loadQValueJson(self):
-        f = open('trainedMLQValue.pkl', 'rb')
-        self.player_Q_values = pickle.load(f)
-        f.close()
+    def loadQValue(self):
+        try:
+            f = open('trainedMLQValue.pkl', 'rb')
+            self.player_Q_values = pickle.load(f)
+            f.close()
+        except:
+            print("""
+            ERROR: The file 'trainedMLQValue.pkl' did not exists, used for loading the Q-values.
+            
+            Please train the model first and save down the Q-table before trying to load the Q-table.
+            """)
+            raise
 
 
