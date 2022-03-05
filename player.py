@@ -2,13 +2,18 @@ import deck as d
 
 class Player:
 
-    def __init__(self, name):
+    def __init__(self, name, strategy):
         self.name = name
+        self.strategy = strategy
         self.clearTotal()
 
-    def drawCard(self, newCard):
+    def updateStrategy(self,strategy):
+        self.strategy = strategy
+
+    def drawCard(self, newCard, debug=False):
         self.cards.append(newCard)
         cardValue = self.cards[-1].getValue()
+        if debug: print('Player class: newCard = {}. CardValue = {}'.format(newCard.show(), cardValue))
         if cardValue == 1 and (self.totalHand + 11 <= 21): #an Ace was drawn and can be used as a soft Ace.
             self.softHand = True
             self.totalHand += 11
@@ -35,6 +40,9 @@ class Player:
     
     def getName(self):
         return self.name
+
+    def getStrategy(self):
+        return self.strategy
 
     def showHand(self):        
         return [str(c) for c in self.cards]
