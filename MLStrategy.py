@@ -16,12 +16,15 @@ player_Q_values[(pT, dT, sH)][a] = q-value
 
 """
 import player
-import BlackJack
+import blackjack
+import dealerstrategy
 import numpy as np
 import pickle
 
 class MLStrategy:
     def __init__(self):
+        self.name = "Machine-Learning Strategy"
+
         self.learning_rate = 0.05 #alpha
         self.discount_rate = 0.9
 
@@ -48,6 +51,9 @@ class MLStrategy:
                             self.player_Q_values[(pT,dT,sH)][a] = 0
         
         self.player_state_action = [] #[(pT, dT, sH)]
+
+    def getStrategyName(self):
+        return self.name
 
     def chooseAction(self, player, dealer):     
         state = (player.getTotal(), dealer.getTotal(), player.hasSoftHand())
@@ -98,11 +104,12 @@ class MLStrategy:
     
     def train(self, rounds, debug = False, saveQValues = False):
 
-        game = BlackJack.BlackJack()
+        game = blackjack.BlackJack()        
+        DealerModel = dealerstrategy.DealerStrategy()
         
         for r in range(rounds):
             if debug: print('\n--- Start of ROUND {}'.format(r+1))
-            game.setupGame()
+            game.setupGame(debug)
 
             if debug: print('Game setup. Start to play')
             if debug: print('Player starts with: ', game.getStatus(game.players[0]))
@@ -119,7 +126,7 @@ class MLStrategy:
                         if debug: print('BUSTS!', game.getStatus(game.players[0]))
                         break  
                 if debug: print('->NewTotal: ', game.getStatus(game.players[0]))
-            game.playDealersTurn()
+            game.playTurn(game.dealer,DealerModel,debug)
 
             #Round is now done. Decide winner and reward
             winners = game.decideWinner()
