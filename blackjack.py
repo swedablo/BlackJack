@@ -1,47 +1,6 @@
-from mlstrategy import MLStrategy
 import deck 
 import player
-import mlstrategy
 import dealerstrategy
-
-class Score:
-    def __init__(self, name='', strategy='dealerstrategy', win=0, tie=0, losses=0):
-        self.namePlayer = name
-        self.playerstrategy = strategy
-        self.wins = win
-        self.ties = tie
-        self.losses = losses
-    
-    def updateStrategy(self,strategy):
-        self.playerstrategy = strategy
-    
-    def win(self):
-        self.wins += 1
-
-    def tie(self):
-        self.ties += 1    
-
-    def loss(self):
-        self.losses += 1
-    
-    def BlackJack(self):
-        self.wins += 1.5
-    
-    def show(self):
-        text = """{}'s scores (Strategy: {}):
-            -wins: {}
-            -ties: {}
-            -losses: {}
-            """.format(self.namePlayer, self.playerstrategy, self.wins, self.ties, self.losses)
-        print(text)
-
-    def reinitialize(self):
-        self.wins = 0
-        self.ties = 0
-        self.losses = 0
-
-    def getScores(self):
-        return (self.namePlayer, self.wins, self.ties, self.losses)
 
 class BlackJack:
 
@@ -193,34 +152,44 @@ class BlackJack:
         for key in self.scores:
             self.scores[key].reinitialize()
 
-if __name__ == '__main__':
+class Score:
+    def __init__(self, name='', strategy='dealerstrategy', win=0, tie=0, losses=0):
+        self.namePlayer = name
+        self.playerstrategy = strategy
+        self.wins = win
+        self.ties = tie
+        self.losses = losses
+    
+    def updateStrategy(self,strategy):
+        self.playerstrategy = strategy
+    
+    def win(self):
+        self.wins += 1
 
-    players = 1
-    rounds  = 150001
-    train = False
-    saveQValues = False
+    def tie(self):
+        self.ties += 1    
 
-    myGame = BlackJack(players)
+    def loss(self):
+        self.losses += 1
+    
+    def BlackJack(self):
+        self.wins += 1.5
+    
+    def show(self):
+        text = """{}'s scores (Strategy: {}):
+            -wins: {}
+            -ties: {}
+            -losses: {}
+            """.format(self.namePlayer, self.playerstrategy, self.wins, self.ties, self.losses)
+        print(text)
 
-    if train:
-        myGame.train_MLStrategy(rounds, debug=False, saveQValues=saveQValues)
+    def reinitialize(self):
+        self.wins = 0
+        self.ties = 0
+        self.losses = 0
 
-    rounds = 100000
-    print('Number of players equals: {}'.format(len(myGame.players)))
-    print('Number of rounds equals : {}'.format(rounds))
-
-    #Machine learning strategy
-    print('ML strategy:')
-    myGame.play_MLStrategy(rounds, debug=False)
-    myGame.showScores()
-    myGame.reinitializeScores()
-
-    #Dealer Strategy
-    print('Dealer strategy')
-    myGame.play_DealerStrategy(rounds, debug=False)
-    myGame.showScores()
-    myGame.reinitializeScores()
-
+    def getScores(self):
+        return (self.namePlayer, self.wins, self.ties, self.losses)
     
 
 

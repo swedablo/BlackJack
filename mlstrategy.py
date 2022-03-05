@@ -152,8 +152,6 @@ class MLStrategy:
         if saveQValues:
             self.saveQValue()
 
-
-
     def updateExplorationRate(self, episode):
         self.exploration_rate = self.min_exploration_rate + (self.max_exploration_rate - self.min_exploration_rate )*np.exp(-1*self.exploration_decay_rate*episode)
 

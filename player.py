@@ -1,4 +1,4 @@
-import deck as d
+import deck
 
 class Player:
 

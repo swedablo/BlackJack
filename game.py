@@ -9,7 +9,7 @@ if __name__ == '__main__':
     strategies  = ['mlstrategy', 'mlstrategy', 'dealerstrategy'] #Select the strategy you want each player to adhere to. Default is dealer's strategy.
     realRounds  = 100000
 
-
+    #Model training configuration
     trainRounds = 250000
     trainModel  = True #If set to False, a loaded Q-table will be used.
     saveQValues = False #Only applicalbe if "TrainModel" is set to True. Will then save down trained Q-table to file
@@ -25,7 +25,6 @@ if __name__ == '__main__':
             model.loadQValue()
         except:
             sys.exit(1) #an exception was raised. Close the program
-
 
     print('\nStarts playing real game:\n')
 
