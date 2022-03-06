@@ -34,6 +34,7 @@ class BlackJack:
                     idx += 1
                 else:
                     print("Selected strategy '{}' for player '{}' is not part of selectable strategies {}.\nDefault strategy is applied.".format(strat,self.players[idx].getName(),self.selectableStrategies))
+                    idx += 1
         else:
             if debug: print('selectedStrategies is empty')
 
@@ -46,11 +47,9 @@ class BlackJack:
         #First card for dealer
         self.dealer.clearTotal()
         self.hitMe(self.dealer)
-#        self.dealer.drawCard(self.playDeck.drawCard())
 
         #Second card for players
         for p in self.players:
-            #p.drawCard(self.playDeck.drawCard())
             self.hitMe(p)
 
         #Second (hidden) card for dealer

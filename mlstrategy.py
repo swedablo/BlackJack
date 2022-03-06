@@ -104,7 +104,7 @@ class MLStrategy:
     
     def train(self, rounds, debug = False, saveQValues = False):
 
-        game = blackjack.BlackJack()        
+        game = blackjack.BlackJack(numPlayers = 1, selectedStrategies = ['mlstrategy'])        
         DealerModel = dealerstrategy.DealerStrategy()
         
         for r in range(rounds):
